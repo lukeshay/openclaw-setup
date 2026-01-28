@@ -3,11 +3,13 @@
 set -e
 
 create_user() {
-  useradd -m moltbot
-  sudo usermod -aG sudo moltbot
-  passwd -d moltbot
-  cp -r ~/.ssh /home/moltbot
-  chown -R moltbot:moltbot /home/moltbot/.ssh
+  if [[ ! $(id -u moltbot) ]]; then
+    useradd -m moltbot
+    sudo usermod -aG sudo moltbot
+    passwd -d moltbot
+    cp -r ~/.ssh /home/moltbot
+    chown -R moltbot:moltbot /home/moltbot/.ssh
+  fi
 }
 
 install_dependencies() {
@@ -24,9 +26,9 @@ install_mise() {
     sudo apt install -y mise
   fi
 
-  cp .mise.toml /home/moltbot/.mise.toml
-  chown moltbot:moltbot /home/moltbot/.mise.toml
-  chmod 644 /home/moltbot/.mise.toml
+  cp mise.toml /home/moltbot/mise.toml
+  chown moltbot:moltbot /home/moltbot/mise.toml
+  chmod 644 /home/moltbot/mise.toml
   sudo -u moltbot mise sync
   sudo -u moltbot mise install
 }
