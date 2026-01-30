@@ -38,8 +38,7 @@ install_dependencies() {
     eval "$($BREW_PATH/bin/brew shellenv)"
   fi
 
-  brew install mise ollama
-  brew install --cask tailscale-app
+  brew install mise ollama tailscale
 }
 
 setup_mise() {
