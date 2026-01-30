@@ -55,6 +55,8 @@ setup_mise() {
 }
 
 setup_tailscale() {
+  sudo systemctl enable --now tailscaled
+
   tailscale up --auth-key "${TAILSCALE_AUTH_KEY}" --hostname "${TAILSCALE_HOSTNAME:-$(hostname)}"
 }
 
